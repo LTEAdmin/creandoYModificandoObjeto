@@ -28,7 +28,7 @@ function Paciente(nombre, rut, edad, diagnostico) {
     this.diagnostico = diagnostico;
 
     Paciente.prototype.getNombre = function () {
-      returnthis.nombre;
+      return this.nombre;
     };
 
     Paciente.prototype.setNombre = function (nombre) {
@@ -49,6 +49,7 @@ function Paciente(nombre, rut, edad, diagnostico) {
     Paciente.prototype.setRut = function (rut) {
       this.rut = rut;
     };
+
     Paciente.prototype.setDiagnostico = function (diagnostico) {
       this.diagnostico = diagnostico;
     };
@@ -60,15 +61,29 @@ function Paciente(nombre, rut, edad, diagnostico) {
 
 // ingreso de datos de los pacientes
 let paciente1 = new Paciente("Maria", "1-9", 30, "covid");
-let paciente2 = new Paciente("juan", "2-7", 85, "neumonia");
-let paciente3 = new Paciente("pedro", "3-5", 25, "influenza");
-let paciente4 = new Paciente("luis", "4-3", 12, "asma");
+let paciente2 = new Paciente("Juan", "2-7", 85, "neumonia");
+let paciente3 = new Paciente("Pedro", "3-5", 25, "influenza");
+let paciente4 = new Paciente("Luis", "4-3", 12, "asma");
+let pacientes = [paciente1, paciente2, paciente3, paciente4];
 
 // ingreso de datos del consultorio
 let consultorio1 = new Consultorio("Consultorio 1", [paciente1, paciente2, paciente3, paciente4]);
 
-console.log(consultorio1); // hasta cargo correctamente a los pacientes en el consultorio
+//método que permita mostrar todos los datos de los usuarios registrados.
+function mostrarPacientes() {
+    console.log("Datos de los pacientes");
+  pacientes.forEach(element => {
+    console.log(`Nombre: ${element.getNombre()} | Rut: ${element.getRut()} | Edad: ${element.getEdad()} | Diagnostico: ${element.getDiagnostico()}`);
+  });
+}
 
-//y otro método que permita mostrar todos los datos de los usuarios registrados.
-
+mostrarPacientes();
 //Crear un método mediante la propiedad prototype que permita buscar los datos de los usuarios por nombre
+Paciente.prototype.buscarPorNombre = function (nombre) {
+    console.log("Buscando por nombre");
+    return this.pacientes.filter(paciente => paciente.nombre === nombre);
+}
+
+var pacienteSolicitado = Paciente.buscarPorNombre("Pedro");
+console.log(`paciente Solicitado con nombre Pedro : ${pacienteSolicitado.Paciente.nombre} , ${pacienteSolicitado.Paciente.rut} , ${pacienteSolicitado.Paciente.edad} , ${pacienteSolicitado.Paciente.diagnostico}`);
+
