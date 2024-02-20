@@ -81,9 +81,20 @@ mostrarPacientes();
 //Crear un método mediante la propiedad prototype que permita buscar los datos de los usuarios por nombre
 Paciente.prototype.buscarPorNombre = function (nombre) {
     console.log("Buscando por nombre");
-    return this.pacientes.filter(paciente => paciente.nombre === nombre);
+    return pacientes.filter(paciente => paciente.nombre === nombre);
 }
 
-var pacienteSolicitado = Paciente.buscarPorNombre("Pedro");
-console.log(`paciente Solicitado con nombre Pedro : ${pacienteSolicitado.Paciente.nombre} , ${pacienteSolicitado.Paciente.rut} , ${pacienteSolicitado.Paciente.edad} , ${pacienteSolicitado.Paciente.diagnostico}`);
+var pacienteSolicitado = Paciente.prototype.buscarPorNombre("Pedro");
+
+if (pacienteSolicitado.length > 0) {
+    let numpaciente = 1;
+    pacienteSolicitado.forEach(function (element) {
+    numpaciente++;
+    console.log(
+      `${numpaciente}.-  Nombre: ${element.getNombre()}, Rut: ${element.getRut()}, Edad: ${element.getEdad()}, Diagnóstico: ${element.getDiagnostico()}`
+    );
+  });
+} else {
+  console.log("No se encontraron pacientes con ese nombre.");
+}
 
